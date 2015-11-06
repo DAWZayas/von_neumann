@@ -1,0 +1,144 @@
+﻿Yasp (https://surtich.github.io/jsYASP/)
+
+Ejercicio 1
+
+Sumar los diez primeros números naturales y almacenarlos en el acumulador
+
+LDA #$00
+STA $FE
+LDX #$00
+INX
+STX $FF
+LDA $FE
+ADD $FF
+STA $FE
+LDA #10
+SUB $FF
+JNZ $06
+LDA $FE
+HLT
+
+
+Ejercicio 2
+
+Cuenta cuantas veces está repetido el número almacenado en $2A entre las posiciones $2B a $2F y almacena ese valor en el acumulador.
+
+LDA #$00
+STA $FE
+LDX #$2A
+INX
+STX $FF
+TXA
+SUB #$30
+JZ $1A
+LDA $2A
+SUB *$FF
+JNZ $06
+LDA $FE
+ADD #$01
+STA $FE
+JMP $06
+LDA $FE
+HLT
+
+
+Ejercicio 3
+
+Escribe en $2A el mayor de los números de las posiciones $2B y $2C.
+
+LDA #$00
+STA $2A
+LDA $2B
+SUB $2C
+JC $0F
+LDX $2C
+STX $2A
+JMP $13
+LDX $2B
+STX $2A
+HLT
+
+
+Ejercicio 4
+
+Pon el número 5 entre las posiciones $30 y $40 de memoria
+
+LDX #$30
+STX $FF
+LDA #$05
+STA *$FF
+INX
+TXA
+SUB #$41
+JNZ $02
+HLT
+
+
+Ejercicios 5
+
+Pon el número que haya almacenado en la posición $29 entre las posiciones que haya $2A y $2F.
+
+LDX #$2A
+STX $FF
+LDA $29
+STA *$FF
+INX
+TXA
+SUB #$30
+JNZ $02
+HLT﻿
+
+
+Ejercicio 6
+
+Cree un programa que multiplique los números $4A y $4B.
+
+LDX #$3A
+STX $FD
+LDX #$49
+STX $FC
+LDA #$00
+STA $FE
+STA $FF
+
+LDA $5A
+STA $5F
+ADD $5F
+JNZ $17
+JMP *$FC 
+
+LDA $5B
+STA $5F
+ADD $5F
+JNZ $20
+JMP *$FC
+
+LDA $5A
+SUB $5B
+JC $27
+JMP $29
+JMP *$FD
+
+LDA $FE
+ADD $5B
+STA $FE
+LDX $FF
+INX
+STX $FF
+TXA
+SUB $5A
+JNZ $29
+JMP $FC
+
+LDA $FE
+ADD $5A
+STA $FE
+LDX $FF
+INX
+STX $FF
+TXA
+SUB $5B
+JNZ $3A
+
+LDA $FE
+HLT
