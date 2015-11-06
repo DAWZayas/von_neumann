@@ -14,3 +14,4 @@ SUB $FE; Restamos X de A
 JNZ $06; Si no hay 0 saltamos a la instrucción 4
 LDA $FF; Recuperamos A de la memoria
 HLT; Acabamos el programa
+
