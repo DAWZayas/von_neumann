@@ -1,0 +1,12 @@
+multiplica dos numeros 
+
+LDA $2A;
+LDX $2B;
+DCX;
+STA $10;
+
+ADD $10;
+DCX;
+JZ $0E;
+JNZ $06;
+HLT;
