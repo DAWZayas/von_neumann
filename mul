@@ -1,4 +1,4 @@
-multiplica dos numeros 
+Multiplica dos numeros
 
 LDA $2A;
 LDX $2B;
