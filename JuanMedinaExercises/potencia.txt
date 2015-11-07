@@ -1,0 +1,16 @@
+LDX $2B; Cargamos en X el número en $2B
+DCX; Restamos uno a X
+STX $3B; Guardamos X en $3B
+LDA $2A; Cargamos en A el número en $2A
+STA $3A; Guardamos A en $3A
+LDX $2A; Cargamos en X el número en $2A (Aqui salta la potencia)
+DCX; Restamos uno a X
+ADD $3A; Sumamos a A el número en $3A (Aqui salta la multiplicación)
+DCX; Restamos uno a X
+JNZ $0C; Si no es cero subimos a la linea 6
+STA $3A; Guardamos A en $3A
+LDX $3B; Cargamos en X la potencia en $3B
+DCX; Restamos uno a X
+STX $3B; Guardamos X en $3B
+JNZ $09; Si no es cero subimos a la linea 6
+HLT
