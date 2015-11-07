@@ -93,33 +93,34 @@ Ejercicio 6
 
 Cree un programa que multiplique los números $4A y $4B.
 
-LDX #$3A
+LDX #$3A ;Este bloque carga en $FD y $FC direcciones para saltos posteriores.
 STX $FD
 LDX #$49
 STX $FC
-LDA #$00
+
+LDA #$00 ; Este bloque pone a 0 $FE y $FF.
 STA $FE
 STA $FF
 
-LDA $5A
+LDA $5A ; Este bloque detecta si A == 0. En caso positivo salta al final del programa.
 STA $5F
 ADD $5F
 JNZ $17
 JMP *$FC 
 
-LDA $5B
+LDA $5B ; Este bloque detecta si B == 0. En caso positivo salta al final del programa.
 STA $5F
 ADD $5F
 JNZ $20
 JMP *$FC
 
-LDA $5A
+LDA $5A ; Este bloque detecta qué número es más alto.
 SUB $5B
 JC $27
 JMP $29
 JMP *$FD
 
-LDA $FE
+LDA $FE ; Este bloque realiza la multiplicación teniendo en cuenta que A es mayor.
 ADD $5B
 STA $FE
 LDX $FF
@@ -130,7 +131,7 @@ SUB $5A
 JNZ $29
 JMP $FC
 
-LDA $FE
+LDA $FE ; Es lo mismo que el de arriba, pero para B.
 ADD $5A
 STA $FE
 LDX $FF
@@ -140,5 +141,5 @@ TXA
 SUB $5B
 JNZ $3A
 
-LDA $FE
+LDA $FE ; Muestra el resultado en A.
 HLT
