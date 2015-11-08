@@ -1,0 +1,37 @@
+Cual es la secuencia más larga de números ordenados entre las posiciones 3A y 4F
+
+
+2 5 4 33 46 33 54 3 4 5 4 3 6 34 1 2 3 4 5 20 21 4
+
+
+
+
+$5A: Siguientes posición
+$5B: Serie ordenada
+$5C: Ultima posicion
+
+
+Cuenta todos los números ordenados... pero no la secuencia más larga
+
+LDA #$0; Ponemos el acumulador a cero
+STA $5B; Guardamos 0 en $5B que será la cuenta de números ordenados
+LDA #$4F; Cargamos en A la última posición a controlar
+STA $5C; Guardamos la última posición a controlar en $5C
+LDX $3A; Cargamos la primera posición en X
+STX $5A; Guardamos la primera posicón en X para luego ir cambiandola
+LDA *$5A; Cargamos en A el número en la posición que le diga $5A (Aquí subimos)
+SUB $5C; Restamos a A la última posición que tenemos en $5C
+JZ $1F; Si 0 saltamos acabamos el programa
+LDA *$5A; Cargamos en A el número en la posición que le diga $5A 
+INX; Incrementamos X en uno
+STX $5A; Guardamos X con la siguiente posición en $5A
+SUB *$5A; Restamos a A el número en la posición que le diga $5A 
+JNZ $0C; Si no es cero vamos a la linea 7
+LDA $5B; Cargamos en A el contador
+INA; Incrementamos A en uno
+STA $5B; Guardamos de nuevo el contador
+JNZ $18; Saltamos a la línea 14 (para ir a la 7) por que no paramos hasta el 0 en la línea 9
+LDA $5B; Cargamos en A el contador
+HLT; Paramos viniendo de la línea 9 
+
+
